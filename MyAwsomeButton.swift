@@ -29,6 +29,36 @@ import UIKit
         }
     }
     
+    @IBInspectable public var shadowColor: UIColor = UIColor.black {
+        didSet {
+            self.addShadow()
+        }
+    }
+    
+    @IBInspectable public var offSetWidth: Double = -1.0 {
+        didSet {
+            self.addShadow()
+        }
+    }
+    
+    @IBInspectable public var offSetHeight: Double = 4.0 {
+        didSet {
+            self.addShadow()
+        }
+    }
+    
+    @IBInspectable public var shadowOpacity: Double = 0.5 {
+        didSet {
+            self.addShadow()
+        }
+    }
+    
+    @IBInspectable public var addShaddow: Bool = false {
+        didSet {
+            self.addShadow()
+        }
+    }
+    
     public override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -37,14 +67,26 @@ import UIKit
         super.init(coder: aDecoder)
     }
     
-//    Int
-//    CGFloat
-//    Double
-//    String
-//    Bool
-//    CGPoint
-//    CGSize
-//    CGRect
-//    UIColor
-//    UIImage
+    public func addShadow() {
+        if addShaddow {
+            self.layer.masksToBounds = false
+            self.layer.shadowColor = self.shadowColor.cgColor
+            self.layer.shadowOpacity = Float(self.shadowOpacity)
+            self.layer.shadowOffset = CGSize(width: self.offSetWidth, height: self.offSetHeight)
+            self.layer.shadowRadius = 4.0
+        } else {
+            self.layer.shadowOpacity = 0
+        }
+    }
+    
+    //    Int
+    //    CGFloat
+    //    Double
+    //    String
+    //    Bool
+    //    CGPoint
+    //    CGSize
+    //    CGRect
+    //    UIColor
+    //    UIImage
 }
